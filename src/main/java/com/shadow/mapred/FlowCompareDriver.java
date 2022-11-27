@@ -7,7 +7,6 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.WritableComparable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
-import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
@@ -19,8 +18,7 @@ import java.io.IOException;
 /**
  * 流量统计：Driver
  * <p>
- * 全排序：hadoop jar wc.jar com.shadow.mapred.FlowCompareDriver /usr/root/flowsort/input1 /usr/root/flowsort/output1 false
- * 分区内排序：hadoop jar wc.jar com.shadow.mapred.FlowCompareDriver /usr/root/flowsort/input1 /usr/root/flowsort/output2 true
+ * 全排序：hadoop jar wc.jar com.shadow.mapred.FlowCompareDriver /usr/root/flowsort/input /usr/root/flowsort/output1 false
  */
 public class FlowCompareDriver {
 
@@ -43,12 +41,6 @@ public class FlowCompareDriver {
         // 5、设置最终输出类型
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(FlowComparableBean.class);
-
-        // TODO 自定义分区器,默认为 HashPartitioner,同时需要知道相应的数量的 ReduceTask
-        if (Boolean.parseBoolean(args[2])) {
-            job.setPartitionerClass(ProvincePartitioner.class);
-            job.setNumReduceTasks(5);
-        }
 
         // 6、设置文件输入输出路径
         FileInputFormat.setInputPaths(job, new Path(args[0]));

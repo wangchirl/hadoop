@@ -45,7 +45,7 @@ public class ReduceJoinDriver {
             job.setOutputKeyClass(Text.class);
             job.setOutputValueClass(NullWritable.class);
             // TODO 加载缓存数据
-            job.addCacheFile(new URI("/usr/root/reduce/join/input/pd.txt"));
+            job.addCacheFile(new URI("/usr/root/join/input/pd.txt"));
             // TODO Map 端 Join 的逻辑不需要 Reduce 阶段，设置 reduceTask数量为0
             job.setNumReduceTasks(0);
         } else {

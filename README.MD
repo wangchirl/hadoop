@@ -17,13 +17,13 @@
 - 使用默认分区器
 
   ```sh
-  hadoop jar wc.jar com.shadow.mapred.FlowDriver /usr/root/flow/input1 /usr/root/flow/output1 false
+  hadoop jar wc.jar com.shadow.mapred.FlowDriver /usr/root/flow/input /usr/root/flow/output1 false
   ```
 
 - 使用自定义分区器
 
   ```sh
-  hadoop jar wc.jar com.shadow.mapred.FlowDriver /usr/root/flow/input1 /usr/root/flow/output2 true
+  hadoop jar wc.jar com.shadow.mapred.FlowDriver /usr/root/flow/input /usr/root/flow/output2 true
   ```
 
 ### 3、小文件合并 - CombineTextInputFormat
@@ -32,18 +32,12 @@
 hadoop jar wc.jar com.shadow.mapred.WordCountCombineDriver /usr/root/comb/input /usr/root/comb/output1
 ```
 
-### 4、流量统计 - 排序 job.setPartitionerClass
+### 4、流量统计 - 排序 
 
 - 全排序
 
   ```sh
-  hadoop jar wc.jar com.shadow.mapred.FlowCompareDriver /usr/root/flowsort/input1 /usr/root/flowsort/output1 false
-  ```
-
-- 分区内排序
-
-  ```sh
-  hadoop jar wc.jar com.shadow.mapred.FlowCompareDriver /usr/root/flowsort/input1 /usr/root/flowsort/output2 true
+  hadoop jar wc.jar com.shadow.mapred.FlowCompareDriver /usr/root/flowsort/input /usr/root/flowsort/output1 false
   ```
 
 ### 5、自定义输出 - job.setOutputFormatClass
